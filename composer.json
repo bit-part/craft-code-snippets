@@ -2,7 +2,7 @@
     "name": "bit-part/craft-code-snippets",
     "description": "Manage and inject code snippets (GTM, Analytics, ad tags, etc.) into your Craft CMS site from the control panel.",
     "type": "craft-plugin",
-    "license": "craft-license",
+    "license": "proprietary",
     "require": {
         "php": "^8.2",
         "craftcms/cms": "^5.0.0"
