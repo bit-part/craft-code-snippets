@@ -1,0 +1,38 @@
+{
+    "name": "bit-part/craft-code-snippets",
+    "description": "Manage and inject code snippets (GTM, Analytics, ad tags, etc.) into your Craft CMS site from the control panel.",
+    "type": "craft-plugin",
+    "license": "craft-license",
+    "require": {
+        "php": "^8.2",
+        "craftcms/cms": "^5.0.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "bitpart\\codesnippets\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "bitpart\\codesnippets\\tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "handle": "code-snippets",
+        "name": "Code Snippets",
+        "developer": "bit part LLC",
+        "developerUrl": "https://bit-part.net",
+        "documentationUrl": "https://github.com/bit-part/craft-code-snippets",
+        "class": "bitpart\\codesnippets\\CodeSnippets",
+        "schemaVersion": "1.0.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
+    }
+}

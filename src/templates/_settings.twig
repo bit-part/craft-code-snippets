@@ -1,0 +1,13 @@
+{% import '_includes/forms' as forms %}
+
+{{ forms.lightswitchField({
+    label: 'Auto Inject'|t('code-snippets'),
+    instructions: 'Automatically inject snippets into rendered HTML without template changes. When disabled, use these Twig functions in your layout template:'|t('code-snippets')
+        ~ '<br><code>{{ craft.codeSnippets.headBegin() }}</code>'
+        ~ '<br><code>{{ craft.codeSnippets.headEnd() }}</code>'
+        ~ '<br><code>{{ craft.codeSnippets.bodyBegin() }}</code>'
+        ~ '<br><code>{{ craft.codeSnippets.bodyEnd() }}</code>',
+    id: 'autoInject',
+    name: 'autoInject',
+    on: settings.autoInject,
+}) }}

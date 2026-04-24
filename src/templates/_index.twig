@@ -1,0 +1,9 @@
+{% extends '_layouts/elementindex' %}
+{% set elementType = 'bitpart\\codesnippets\\elements\\Snippet' %}
+{% set title = 'Code Snippets'|t('code-snippets') %}
+
+{% block actionButton %}
+    {% if currentUser.can('codeSnippets-manageSnippets') %}
+        <a href="{{ cpUrl('code-snippets/new') }}" class="btn submit">{{ 'New Snippet'|t('code-snippets') }}</a>
+    {% endif %}
+{% endblock %}

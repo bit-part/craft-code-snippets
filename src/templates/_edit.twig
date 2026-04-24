@@ -1,0 +1,122 @@
+{% extends '_layouts/cp' %}
+{% import '_includes/forms' as forms %}
+
+{% set fullPageForm = true %}
+
+{% block actionButton %}
+    <input type="submit" class="btn submit" value="{{ 'Save'|t('code-snippets') }}">
+{% endblock %}
+
+{% block content %}
+    {{ actionInput('code-snippets/snippet/save') }}
+
+    {% if snippet.id %}
+        {{ hiddenInput('snippetId', snippet.id) }}
+    {% endif %}
+
+    {{ forms.textField({
+        label: 'Name'|t('code-snippets'),
+        instructions: 'A descriptive name for this snippet (e.g. "Google Analytics", "Facebook Pixel").'|t('code-snippets'),
+        id: 'title',
+        name: 'title',
+        value: snippet.title,
+        required: true,
+        errors: snippet.getErrors('title'),
+        autofocus: true,
+    }) }}
+
+    {{ forms.textareaField({
+        label: 'Description'|t('code-snippets'),
+        instructions: 'Optional notes about this snippet.'|t('code-snippets'),
+        id: 'description',
+        name: 'description',
+        value: snippet.description,
+        rows: 2,
+    }) }}
+
+    <div id="code-warning" class="warning has-icon" style="margin-bottom: 1rem;">
+        <p>{{ 'Code entered here is output directly to the site. Use only trusted sources.'|t('code-snippets') }}</p>
+    </div>
+
+    {{ forms.textareaField({
+        label: 'Code'|t('code-snippets'),
+        instructions: 'The HTML/JavaScript code to inject. Include the &lt;script&gt; tags if needed.'|t('code-snippets'),
+        id: 'code',
+        name: 'code',
+        value: snippet.code,
+        required: true,
+        errors: snippet.getErrors('code'),
+        rows: 20,
+        class: 'code',
+        inputAttributes: {
+            spellcheck: 'false',
+            autocapitalize: 'off',
+            autocorrect: 'off',
+            'aria-describedby': 'code-warning',
+        },
+    }) }}
+
+    {{ forms.selectField({
+        label: 'Position'|t('code-snippets'),
+        instructions: 'Where in the HTML to inject this snippet.'|t('code-snippets'),
+        id: 'position',
+        name: 'position',
+        value: snippet.position,
+        options: positions,
+        required: true,
+        errors: snippet.getErrors('position'),
+    }) }}
+
+    {{ forms.textField({
+        label: 'Sort Order'|t('code-snippets'),
+        instructions: 'Controls the order of snippets within the same position. Lower numbers appear first.'|t('code-snippets'),
+        id: 'sortOrder',
+        name: 'sortOrder',
+        value: snippet.sortOrder,
+        type: 'number',
+        min: 0,
+        max: 32767,
+        step: 1,
+    }) }}
+
+    <hr>
+
+    <section aria-labelledby="conditions-heading">
+        <h2 id="conditions-heading">{{ 'Conditions'|t('code-snippets') }}</h2>
+
+        {% set selectedEnvs = snippet.getEnvironments() %}
+
+        {{ forms.checkboxGroupField({
+            label: 'Environments'|t('code-snippets'),
+            instructions: 'Select which environments this snippet should be active in. Leave all unchecked for all environments.'|t('code-snippets'),
+            id: 'environments',
+            name: 'environments',
+            values: selectedEnvs,
+            options: environments,
+        }) }}
+
+        {{ forms.textareaField({
+            label: 'URI Patterns'|t('code-snippets'),
+            instructions: 'Restrict this snippet to specific pages. One pattern per line. Use `*` as wildcard (e.g. `products/*`). Leave empty for all pages.'|t('code-snippets'),
+            id: 'uriPattern',
+            name: 'uriPattern',
+            value: snippet.uriPattern,
+            rows: 3,
+            class: 'code',
+        }) }}
+    </section>
+
+    <hr>
+
+    <section aria-labelledby="settings-heading">
+        <h2 id="settings-heading">{{ 'Settings'|t('code-snippets') }}</h2>
+
+        {{ forms.lightswitchField({
+            label: 'Enabled'|t('code-snippets'),
+            instructions: 'Whether this snippet is currently active.'|t('code-snippets'),
+            id: 'enabled',
+            name: 'enabled',
+            on: snippet.enabled,
+        }) }}
+    </section>
+{% endblock %}
