@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.0 - 2026-03-30
+## 1.0.0 - 2026-04-24
 
 ### Added
 - CP section for managing code snippets using Craft's native element index
